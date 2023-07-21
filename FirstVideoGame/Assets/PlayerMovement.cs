@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rd;
-    public float forwardForce;
+    public float forwardForce = 600f;
+    public float sidewaysForce = 500f;
 
     // Start is called before the first frame update
     void Start()
@@ -14,17 +15,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         rd.AddForce(0, 0, forwardForce* Time.deltaTime);
 
         if (Input.GetKey("d"))
         {
-            rd.AddForce(500*Time.deltaTime, 0, 0);
+            rd.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
         else if (Input.GetKey("a"))
         {
-            rd.AddForce(-500 * Time.deltaTime, 0, 0);
+            rd.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
     }
 }
